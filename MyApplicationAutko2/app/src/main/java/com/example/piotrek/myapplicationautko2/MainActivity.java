@@ -11,7 +11,7 @@ import android.bluetooth.BluetoothSocket;
 import java.io.IOException;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Runnable{
 
     String addressOfBltDevice = null;
     private ProgressDialog progressOfDialog;
@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
        // new ConnectBlt().execute();       //ToDo Uncomment
     }
 
+    @Override
+    public void run() {
+
+    }
 
     public class ConnectBlt extends AsyncTask<Void, Void, Void>
     {
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             /* Progress dialog */
             System.out.println("Asynch Task1");
 
-            progressOfDialog = ProgressDialog.show(MainActivity.this, "Trwa łączenie...", "Proszę czekać :)");
+//            progressOfDialog = ProgressDialog.show(MainActivity.this, "Trwa łączenie...", "Proszę czekać :)");
         }
 
         @Override
