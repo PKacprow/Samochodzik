@@ -1,0 +1,37 @@
+/*! \file MainActivity.java
+*  \brief Java file storing xxx
+*/
+/*****************************************************************************
+ * Based on template: Template.txt                                           *
+ *                                                                           *
+ * PROJECT ID:   Autko                                                       *
+ *                                                                           *
+ * FILE DESCRIPTION:                                                         *
+ * This file supports XXX functionality.                                     *
+ * ***************************************************************************
+ * AUTHORS:                                                                  *
+ * Piotr Kacprowicz 214xxx                                                   *
+ * Patryk Cieúlak 214397                                                     *
+ * Location: £Ûdü                                                            *
+ *****************************************************************************/
+ 
+ To description of methods 
+/*!
+* \fn private void Disconnect()
+* \brief XXX
+* \param none
+* \return none
+*/
+ 
+ To description of variables
+ /*! \brief XXX*/
+ 
+ 
+ 
+ To description of variables(not visible on main viev)
+ /*!< XXX*/
+ 
+ 
+ 
+	   
+	   
