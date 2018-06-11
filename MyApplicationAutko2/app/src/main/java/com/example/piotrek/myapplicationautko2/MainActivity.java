@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent newint = getIntent();
+        address = newint.getStringExtra(Devices.EXTRA_ADDRESS); //receive the address of the bluetooth device
+        System.out.println("adresik --------------- " + address);
+
+
         new ConnectBlt().execute();
         frontLamp = (Button) findViewById(R.id.frontLamp);
         rearLamp = (Button) findViewById(R.id.rearLamp);
@@ -202,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
                     Thread.sleep(10); // było 10
                 } catch (Exception e) {
-
+                    //TODO show exception
                 }
             }
         }
