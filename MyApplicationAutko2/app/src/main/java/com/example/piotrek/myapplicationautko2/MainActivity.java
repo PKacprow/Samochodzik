@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     RelativeLayout layout_joystick;
     JoyStickClass js;
     int accelerattion = 0;
-
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //ToDO Move to strings.xml
 
     @Override
@@ -42,9 +41,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         setContentView(R.layout.activity_main);
 
         Intent newint = getIntent();
-        address = newint.getStringExtra(Devices.EXTRA_ADDRESS); //receive the address of the bluetooth device
-        System.out.println("adresik --------------- " + address);
-
+        addressOfBltDevice = newint.getStringExtra(Devices.EXTRA_ADDRESS);
 
         new ConnectBlt().execute();
         frontLamp = (Button) findViewById(R.id.frontLamp);
@@ -94,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                     } else if (direction == JoyStickClass.STICK_NONE) {
                         textView5.setText("Direction : Center");
                     }
-                    //  int angl = (int) js.getAngle();
-                    // sendnningred(String.valueOf(angl)+":");
                 } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
                     textView1.setText("X :");
                     textView2.setText("Y :");
@@ -110,8 +105,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         rearLamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                System.out.println("adresik --------------- " + address);
-
                 sendnningred("REAR");
             }
         });
@@ -119,54 +112,41 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         frontLamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // onAddRecipes(v);
-
                 sendnningred("FRONT");
             }
         });
 
-
         startjoy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // onAddRecipes(v);
                 handler = new Handler();
                 Thread t2 = new Thread(callback2);
                 t2.start();
 
             }
         });
-
-     /*   handler = new Handler();
-        Thread t2 = new Thread(callback2);
-        t2.start();*/
     }
+
     private Runnable callback2 = new Runnable() {
         @Override
         public void run() {
-            System.out.println("WATEK !!!!!!!!!222");
             int buf = 0;
             int dir = 0;
             while (true) {
                 try {
-                    //  buf = Integer.parseInt(buffor);
-                    //setmySmth(buffor);
-                    //sendingred(String.valueOf("\n"+js.getAngle())+":");
-                    // btSocket.getOutputStream().write(String.);
                     int direction = js.get4Direction();
                     String directionAsString = String.valueOf(direction);
-                    //sendnningred("\n"+directionAsString+":");
-
                     int  saturation = Integer.valueOf(js.getY());
                     for (int a = 0; a<20 ; a++) {
                         saturation = saturation + Integer.valueOf(js.getY());
                         Thread.sleep(10);
                     }
                     if (saturation < 0) saturation = -saturation;
-                    saturation = (saturation * 1275) / 20000;
-                    if (saturation > 255) saturation = 255;
-
-
+                    saturation = (saturation * 1275) / 20000; //To ensure proper value in microcontroler atmega, wchich using 8-bit digit
+                    if (saturation > 255)
+                    {
+                        saturation = 255;
+                    }
 
                     if(direction == 1 || direction == 3 || direction == 5  || direction == 7) {
                         if(direction == 1 && dir != 1) {
@@ -204,47 +184,39 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
                         sendnningred(""+saturation);
                     }
-
-                    Thread.sleep(10); // było 10
+                    Thread.sleep(10);
                 } catch (Exception e) {
-                    //TODO show exception
+                    //TODO throw exception
                 }
             }
         }
     };
 
-
     private void Disconnect() {
-        if (bltSocket != null) //If the btSocket is busy
+        if (bltSocket != null)
         {
             try {
-                bltSocket.close(); //close connection
+                bltSocket.close();
             } catch (IOException e) {
                 showmsg("Error");
             }
         }
-        finish(); //return to the first layout
+        finish();
     }
-
 
     public class ConnectBlt extends AsyncTask<Void, Void, Void>
     {
-        /* Connection of Bluetooth in asynch task */
         private boolean isSuccessConnection = true;
 
         @Override
         protected void onPreExecute()
         {
-            /* Progress dialog */
-            System.out.println("Asynch Task1");
-
             progressOfDialog = ProgressDialog.show(MainActivity.this, "Trwa łączenie...", "Proszę czekać :)");
         }
 
         @Override
         protected Void doInBackground(Void... arg0)
         {
-            /* Proces of connection is done in background */
             System.out.println("Asynch Task2");
 
             try
@@ -252,14 +224,14 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 if (bltSocket == null || !isBltConnected)
                 {
                     myBltDevice = BluetoothAdapter.getDefaultAdapter();
-                    BluetoothDevice dispositivo = myBltDevice.getRemoteDevice(addressOfBltDevice);  // Connect to device's adress
-                    bltSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);  //Create a RFCOMM (SPP) connection
+                    BluetoothDevice dispositivo = myBltDevice.getRemoteDevice(addressOfBltDevice);
+                    bltSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                     bltSocket.connect();
                 }
             } catch (IOException exception)
             {
-                isSuccessConnection = false;    // failed if device is not available
+                isSuccessConnection = false;
             }
             return null;
         }
@@ -267,23 +239,16 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         @Override
         protected void onPostExecute(Void result)
         {
-            /* Check did connection is correct */
-            System.out.println("Asynch Task3");
-
             super.onPostExecute(result);
-
             if (!isSuccessConnection)
             {
-                /* Problem with connection */
                 finish();
             } else {
-                /* Connect */
                 isBltConnected = true;
             }
             progressOfDialog.dismiss();
         }
     }
-
 
     private void showmsg(String s) {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
@@ -294,11 +259,10 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         if (bltSocket != null) {
             try {
                 bltSocket.getOutputStream();
-     //           bltSocket.write(sth.toString().getBytes());
                 System.out.println("Wyslano dane"+bltSocket);
             } catch (IOException e) {
-                //msg("Error");
+                //TODO throw exception
             }
         }
     }
-}
+}g
