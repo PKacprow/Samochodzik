@@ -1,4 +1,37 @@
 <resources>
     <string name="app_name">My ApplicationAutko</string>
-    <string name="SPP_UUID_to_serial_board_connection">00001101-0000-1000-8000-00805F9B34FB</string>
+    <string name="Main_UIDDToSerialBoardConnection">00001101-0000-1000-8000-00805F9B34FB</string>
+    <string name="Main_CommandX">X : </string>
+    <string name="Main_CommandY">Y : </string>
+    <string name="Main_CommandAngle">Angle : </string>
+    <string name="Main_CommandDistance">Distance : </string>
+    <string name="Main_CommandDirection">Direction :</string>
+    <string name="Main_CommandDirUp">Direction : Up</string>
+    <string name="Main_CommandDirUpRight">Direction : Up Right</string>
+    <string name="Main_CommandDirRight">Direction : Right</string>
+    <string name="Main_CommandDirUpDownRight">Direction : Down Right</string>
+    <string name="Main_CommandDirDown">Direction : Down</string>
+    <string name="Main_CommandDirDownLeft">Direction : Down Left</string>
+    <string name="Main_CommandDirLeft">Direction : Left</string>
+    <string name="Main_CommandDirUpLeft">Direction : Up Left</string>
+    <string name="Main_CommandDirCenter">Direction : Center</string>
+    <string name="Main_CommandRear">REAR</string>
+    <string name="Main_CommandFront">FRONT</string>
+    <string name="Main_CommandError">Error</string>
+    <string name="Main_DialodTitle">Trwa ³¹czenie...</string>
+    <string name="Main_DialodMessage">Proszê czekaæ :)</string>
+
+    <string name="Devices_Adress">device_address</string>
+    <string name="Devices_CommandNonAvailableBluetooth">Bluetooth Device Not Available</string>
+    <string name="Devices_CommandNoPairedDevices">No Paired Bluetooth Devices Found</string>
+
+
+
+
+    <string name="Main_DebugCommand1">Zmiana kierunku na 1 </string>
+    <string name="Main_DebugCommand3">Zmiana kierunku na 3 </string>
+    <string name="Main_DebugCommand5">Zmiana kierunku na 5 </string>
+    <string name="Main_DebugCommand7">Zmiana kierunku na 7 </string>
+    <string name="Main_DebugCommandDataSending">Wyslano dane</string>
+
 </resources>

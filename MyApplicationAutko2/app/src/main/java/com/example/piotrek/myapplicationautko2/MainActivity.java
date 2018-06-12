@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     RelativeLayout layout_joystick;
     JoyStickClass js;
     int accelerattion = 0;
-    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //ToDO Move to strings.xml
+    static final UUID myUUID = UUID.fromString("@string/Main_UIDDToSerialBoardConnection");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,38 +65,39 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 js.drawStick(arg1);
                 if (arg1.getAction() == MotionEvent.ACTION_DOWN
                         || arg1.getAction() == MotionEvent.ACTION_MOVE) {
-                    textView1.setText("X : " + String.valueOf(js.getX()));
-                    textView2.setText("Y : " + String.valueOf(js.getY()));
+                    textView1.setText("@string/Main_CommandX" + String.valueOf(js.getX()));
+                    textView2.setText("@string/Main_CommandY" + String.valueOf(js.getY()));
                     accelerattion = js.getY();
-                    textView3.setText("Angle : " + String.valueOf(js.getAngle()));
-                    textView4.setText("Distance : " + String.valueOf(js.getDistance()));
+                    textView3.setText("@string/Main_CommandAngle" + String.valueOf(js.getAngle()));
+                    textView4.setText("@string/Main_CommandDistance" + String.valueOf(
+                            js.getDistance()));
 
                     int direction = js.get8Direction();
                     if (direction == JoyStickClass.STICK_UP) {
-                        textView5.setText("Direction : Up");
+                        textView5.setText("@string/Main_CommandDirUp");
                     } else if (direction == JoyStickClass.STICK_UPRIGHT) {
-                        textView5.setText("Direction : Up Right");
+                        textView5.setText("@string/Main_CommandDirUpRight");
                     } else if (direction == JoyStickClass.STICK_RIGHT) {
-                        textView5.setText("Direction : Right");
+                        textView5.setText("@string/Main_CommandDirRight");
                     } else if (direction == JoyStickClass.STICK_DOWNRIGHT) {
-                        textView5.setText("Direction : Down Right");
+                        textView5.setText("@string/Main_CommandDirUpDownRight");
                     } else if (direction == JoyStickClass.STICK_DOWN) {
-                        textView5.setText("Direction : Down");
+                        textView5.setText("@string/Main_CommandDirDown");
                     } else if (direction == JoyStickClass.STICK_DOWNLEFT) {
-                        textView5.setText("Direction : Down Left");
+                        textView5.setText("@string/Main_CommandDirDownLeft");
                     } else if (direction == JoyStickClass.STICK_LEFT) {
-                        textView5.setText("Direction : Left");
+                        textView5.setText("@string/Main_CommandDirLeft");
                     } else if (direction == JoyStickClass.STICK_UPLEFT) {
-                        textView5.setText("Direction : Up Left");
+                        textView5.setText("@string/Main_CommandDirUpLeft");
                     } else if (direction == JoyStickClass.STICK_NONE) {
-                        textView5.setText("Direction : Center");
+                        textView5.setText("@string/Main_CommandDirCenter");
                     }
                 } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
-                    textView1.setText("X :");
-                    textView2.setText("Y :");
-                    textView3.setText("Angle :");
-                    textView4.setText("Distance :");
-                    textView5.setText("Direction :");
+                    textView1.setText("@string/Main_CommandX");
+                    textView2.setText("@string/Main_CommandY");
+                    textView3.setText("@string/Main_CommandAngle");
+                    textView4.setText("@string/Main_CommandDistance");
+                    textView5.setText("@string/Main_CommandDirection");
                 }
                 return true;
             }
@@ -105,14 +106,14 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         rearLamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendnningred("REAR");
+                sendnningred("@string/Main_CommandRear");
             }
         });
 
         frontLamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendnningred("FRONT");
+                sendnningred("@string/Main_CommandFront");
             }
         });
 
@@ -142,7 +143,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                         Thread.sleep(10);
                     }
                     if (saturation < 0) saturation = -saturation;
-                    saturation = (saturation * 1275) / 20000; //To ensure proper value in microcontroler atmega, wchich using 8-bit digit
+                    //To ensure proper value in microcontroler atmega, wchich using 8-bit digit
+                    saturation = (saturation * 1275) / 20000;
                     if (saturation > 255)
                     {
                         saturation = 255;
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("1");
                                 Thread.sleep(40);
                                 dir = 1;
-                                System.out.println("Zmiana kierunku na 1 ");
+                                System.out.println("@string/Main_DebugCommand1");
                             }
                         }
                         if(direction == 5 && dir != 5) {
@@ -162,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("5");
                                 Thread.sleep(40);
                                 dir = 5;
-                                System.out.println("Zmiana kierunku na 5 ");
+                                System.out.println("@string/Main_DebugCommand5");
                             }
                         }
                         if(direction == 3 && dir != 3) {
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("3");
                                 Thread.sleep(40);
                                 dir = 3;
-                                System.out.println("Zmiana kierunku na 3 ");
+                                System.out.println("@string/Main_DebugCommand3");
                             }
                         }
                         if(direction == 7 && dir != 7) {
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("7");
                                 Thread.sleep(40);
                                 dir = 7;
-                                System.out.println("Zmiana kierunku na 7 ");
+                                System.out.println("@string/Main_DebugCommand7");
                             }
                         }
 
@@ -198,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             try {
                 bltSocket.close();
             } catch (IOException e) {
-                showmsg("Error");
+                showmsg("@string/Main_CommandError");
             }
         }
         finish();
@@ -211,13 +213,13 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         @Override
         protected void onPreExecute()
         {
-            progressOfDialog = ProgressDialog.show(MainActivity.this, "Trwa łączenie...", "Proszę czekać :)");
+            progressOfDialog = ProgressDialog.show(MainActivity.this,
+                    "@string/Main_DialodTitle", "@string/Main_DialodMessage");
         }
 
         @Override
         protected Void doInBackground(Void... arg0)
         {
-            System.out.println("Asynch Task2");
 
             try
             {
@@ -259,10 +261,10 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         if (bltSocket != null) {
             try {
                 bltSocket.getOutputStream();
-                System.out.println("Wyslano dane"+bltSocket);
+                System.out.println("@string/Main_DebugCommandDataSending"+bltSocket);
             } catch (IOException e) {
                 //TODO throw exception
             }
         }
     }
-}g
+}

@@ -1,5 +1,5 @@
 Require:
-* maximum 100 characters in one codes line
++ maximum 100 characters in one codes line
 * classes, public methods and fields starts with uppercase letter
 * constants use all caps letter
 * private fields starts with lowercase letter
@@ -9,5 +9,6 @@ Require:
 * 4 spaces for blocks(not tab)
 * instanes variables with "s" for static or "m" for member variable or data member
 * remove "magic numbers"
-* define strings instead hardcoded
++ define strings instead hardcoded
 * public methods should be befor protected and private
+* use template file
