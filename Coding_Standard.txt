@@ -1,0 +1,13 @@
+Require:
+* maximum 100 characters in one codes line
+* classes, public methods and fields starts with uppercase letter
+* constants use all caps letter
+* private fields starts with lowercase letter
+* limit the scope of variables as much as possible
+* initialize local variables when declared
+* always use braces for if statements
+* 4 spaces for blocks(not tab)
+* instanes variables with "s" for static or "m" for member variable or data member
+* remove "magic numbers"
+* define strings instead hardcoded
+* public methods should be befor protected and private
