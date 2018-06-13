@@ -1,3 +1,20 @@
+/*! \file Devices.java
+*  \brief Java file storing Devices class
+*/
+/*****************************************************************************
+ * Based on template: File_Template.txt                                      *
+ *                                                                           *
+ * PROJECT ID:   Autko                                                       *
+ *                                                                           *
+ * FILE DESCRIPTION:                                                         *
+ * This file supports devices functionality.                                 *
+ * ***************************************************************************
+ * AUTHORS:                                                                  *
+ * Piotr Kacprowicz 214401                                                   *
+ * Patryk Cieślak 214397                                                     *
+ * Location: Łódź                                                            *
+ *****************************************************************************/
+
 package com.example.piotrek.myapplicationautko2;
 
 import android.app.ProgressDialog;

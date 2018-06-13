@@ -11,4 +11,4 @@ Require:
 * remove "magic numbers"
 + define strings instead hardcoded
 * public methods should be befor protected and private
-* use template file
++ use template file

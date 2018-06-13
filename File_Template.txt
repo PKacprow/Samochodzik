@@ -1,8 +1,8 @@
-/*! \file MainActivity.java
+/*! \file XXX.java
 *  \brief Java file storing xxx
 */
 /*****************************************************************************
- * Based on template: Template.txt                                           *
+ * Based on template: File_Template.txt                                      *
  *                                                                           *
  * PROJECT ID:   Autko                                                       *
  *                                                                           *
@@ -10,7 +10,7 @@
  * This file supports XXX functionality.                                     *
  * ***************************************************************************
  * AUTHORS:                                                                  *
- * Piotr Kacprowicz 214xxx                                                   *
+ * Piotr Kacprowicz 214401                                                   *
  * Patryk Cieúlak 214397                                                     *
  * Location: £Ûdü                                                            *
  *****************************************************************************/

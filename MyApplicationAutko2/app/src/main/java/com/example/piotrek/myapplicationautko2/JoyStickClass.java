@@ -1,3 +1,20 @@
+/*! \file JoyStickClass.java
+*  \brief Java file storing JoyStick class
+*/
+/*****************************************************************************
+ * Based on template: File_Template.txt                                      *
+ *                                                                           *
+ * PROJECT ID:   Autko                                                       *
+ *                                                                           *
+ * FILE DESCRIPTION:                                                         *
+ * This file supports joystick functionality.                                *
+ * ***************************************************************************
+ * AUTHORS:                                                                  *
+ * Piotr Kacprowicz 214401                                                   *
+ * Patryk Cieślak 214397                                                     *
+ * Location: Łódź                                                            *
+ *****************************************************************************/
+
 package com.example.piotrek.myapplicationautko2;
 
 import android.content.Context;

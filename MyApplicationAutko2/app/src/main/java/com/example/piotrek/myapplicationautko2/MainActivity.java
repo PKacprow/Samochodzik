@@ -1,3 +1,20 @@
+/*! \file Mainactivity.java
+*  \brief Java file storing MainActivity and ConnectBlt classes
+*/
+/*****************************************************************************
+ * Based on template: File_Template.txt                                      *
+ *                                                                           *
+ * PROJECT ID:   Autko                                                       *
+ *                                                                           *
+ * FILE DESCRIPTION:                                                         *
+ * This file supports main functionality.                                    *
+ * ***************************************************************************
+ * AUTHORS:                                                                  *
+ * Piotr Kacprowicz 214401                                                   *
+ * Patryk Cieślak 214397                                                     *
+ * Location: Łódź                                                            *
+ *****************************************************************************/
+ 
 package com.example.piotrek.myapplicationautko2;
 
 import android.app.ProgressDialog;
