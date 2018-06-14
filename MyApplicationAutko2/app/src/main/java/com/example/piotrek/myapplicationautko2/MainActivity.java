@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         setContentView(R.layout.activity_main);
 
         Intent newint = getIntent();
-        address = newint.getStringExtra(Devices.EXTRA_ADDRESS); //receive the address of the bluetooth device
-        System.out.println("adresik --------------- " + address);
+        addressOfBltDevice = newint.getStringExtra(Devices.EXTRA_ADDRESS); //receive the address of the bluetooth device
+        System.out.println("adresik --------------- " + addressOfBltDevice);
 
 
         new ConnectBlt().execute();
