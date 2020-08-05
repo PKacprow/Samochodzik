@@ -1,3 +1,20 @@
+/*! \file Mainactivity.java
+*  \brief Java file storing MainActivity and ConnectBlt classes
+*/
+/*****************************************************************************
+ * Based on template: File_Template.txt                                      *
+ *                                                                           *
+ * PROJECT ID:   Autko                                                       *
+ *                                                                           *
+ * FILE DESCRIPTION:                                                         *
+ * This file supports main functionality.                                    *
+ * ***************************************************************************
+ * AUTHORS:                                                                  *
+ * Piotr Kacprowicz 214401                                                   *
+ * Patryk Cieślak 214397                                                     *
+ * Location: Łódź                                                            *
+ *****************************************************************************/
+ 
 package com.example.piotrek.myapplicationautko2;
 
 import android.app.ProgressDialog;
@@ -33,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     RelativeLayout layout_joystick;
     JoyStickClass js;
     int accelerattion = 0;
-
-    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //ToDO Move to strings.xml
+    static final UUID myUUID = UUID.fromString("@string/Main_UIDDToSerialBoardConnection");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +58,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         setContentView(R.layout.activity_main);
 
         Intent newint = getIntent();
-        address = newint.getStringExtra(Devices.EXTRA_ADDRESS); //receive the address of the bluetooth device
-        System.out.println("adresik --------------- " + address);
-
+        addressOfBltDevice = newint.getStringExtra(Devices.EXTRA_ADDRESS);
 
         new ConnectBlt().execute();
         frontLamp = (Button) findViewById(R.id.frontLamp);
@@ -68,40 +82,39 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                 js.drawStick(arg1);
                 if (arg1.getAction() == MotionEvent.ACTION_DOWN
                         || arg1.getAction() == MotionEvent.ACTION_MOVE) {
-                    textView1.setText("X : " + String.valueOf(js.getX()));
-                    textView2.setText("Y : " + String.valueOf(js.getY()));
+                    textView1.setText("@string/Main_CommandX" + String.valueOf(js.getX()));
+                    textView2.setText("@string/Main_CommandY" + String.valueOf(js.getY()));
                     accelerattion = js.getY();
-                    textView3.setText("Angle : " + String.valueOf(js.getAngle()));
-                    textView4.setText("Distance : " + String.valueOf(js.getDistance()));
+                    textView3.setText("@string/Main_CommandAngle" + String.valueOf(js.getAngle()));
+                    textView4.setText("@string/Main_CommandDistance" + String.valueOf(
+                            js.getDistance()));
 
                     int direction = js.get8Direction();
                     if (direction == JoyStickClass.STICK_UP) {
-                        textView5.setText("Direction : Up");
+                        textView5.setText("@string/Main_CommandDirUp");
                     } else if (direction == JoyStickClass.STICK_UPRIGHT) {
-                        textView5.setText("Direction : Up Right");
+                        textView5.setText("@string/Main_CommandDirUpRight");
                     } else if (direction == JoyStickClass.STICK_RIGHT) {
-                        textView5.setText("Direction : Right");
+                        textView5.setText("@string/Main_CommandDirRight");
                     } else if (direction == JoyStickClass.STICK_DOWNRIGHT) {
-                        textView5.setText("Direction : Down Right");
+                        textView5.setText("@string/Main_CommandDirUpDownRight");
                     } else if (direction == JoyStickClass.STICK_DOWN) {
-                        textView5.setText("Direction : Down");
+                        textView5.setText("@string/Main_CommandDirDown");
                     } else if (direction == JoyStickClass.STICK_DOWNLEFT) {
-                        textView5.setText("Direction : Down Left");
+                        textView5.setText("@string/Main_CommandDirDownLeft");
                     } else if (direction == JoyStickClass.STICK_LEFT) {
-                        textView5.setText("Direction : Left");
+                        textView5.setText("@string/Main_CommandDirLeft");
                     } else if (direction == JoyStickClass.STICK_UPLEFT) {
-                        textView5.setText("Direction : Up Left");
+                        textView5.setText("@string/Main_CommandDirUpLeft");
                     } else if (direction == JoyStickClass.STICK_NONE) {
-                        textView5.setText("Direction : Center");
+                        textView5.setText("@string/Main_CommandDirCenter");
                     }
-                    //  int angl = (int) js.getAngle();
-                    // sendnningred(String.valueOf(angl)+":");
                 } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
-                    textView1.setText("X :");
-                    textView2.setText("Y :");
-                    textView3.setText("Angle :");
-                    textView4.setText("Distance :");
-                    textView5.setText("Direction :");
+                    textView1.setText("@string/Main_CommandX");
+                    textView2.setText("@string/Main_CommandY");
+                    textView3.setText("@string/Main_CommandAngle");
+                    textView4.setText("@string/Main_CommandDistance");
+                    textView5.setText("@string/Main_CommandDirection");
                 }
                 return true;
             }
@@ -110,63 +123,49 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         rearLamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                System.out.println("adresik --------------- " + address);
-
-                sendnningred("REAR");
+                sendnningred("@string/Main_CommandRear");
             }
         });
 
         frontLamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // onAddRecipes(v);
-
-                sendnningred("FRONT");
+                sendnningred("@string/Main_CommandFront");
             }
         });
-
 
         startjoy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // onAddRecipes(v);
                 handler = new Handler();
                 Thread t2 = new Thread(callback2);
                 t2.start();
 
             }
         });
-
-     /*   handler = new Handler();
-        Thread t2 = new Thread(callback2);
-        t2.start();*/
     }
+
     private Runnable callback2 = new Runnable() {
         @Override
         public void run() {
-            System.out.println("WATEK !!!!!!!!!222");
             int buf = 0;
             int dir = 0;
             while (true) {
                 try {
-                    //  buf = Integer.parseInt(buffor);
-                    //setmySmth(buffor);
-                    //sendingred(String.valueOf("\n"+js.getAngle())+":");
-                    // btSocket.getOutputStream().write(String.);
                     int direction = js.get4Direction();
                     String directionAsString = String.valueOf(direction);
-                    //sendnningred("\n"+directionAsString+":");
-
                     int  saturation = Integer.valueOf(js.getY());
                     for (int a = 0; a<20 ; a++) {
                         saturation = saturation + Integer.valueOf(js.getY());
                         Thread.sleep(10);
                     }
                     if (saturation < 0) saturation = -saturation;
+                    //To ensure proper value in microcontroler atmega, wchich using 8-bit digit
                     saturation = (saturation * 1275) / 20000;
-                    if (saturation > 255) saturation = 255;
-
-
+                    if (saturation > 255)
+                    {
+                        saturation = 255;
+                    }
 
                     if(direction == 1 || direction == 3 || direction == 5  || direction == 7) {
                         if(direction == 1 && dir != 1) {
@@ -174,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("1");
                                 Thread.sleep(40);
                                 dir = 1;
-                                System.out.println("Zmiana kierunku na 1 ");
+                                System.out.println("@string/Main_DebugCommand1");
                             }
                         }
                         if(direction == 5 && dir != 5) {
@@ -182,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("5");
                                 Thread.sleep(40);
                                 dir = 5;
-                                System.out.println("Zmiana kierunku na 5 ");
+                                System.out.println("@string/Main_DebugCommand5");
                             }
                         }
                         if(direction == 3 && dir != 3) {
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("3");
                                 Thread.sleep(40);
                                 dir = 3;
-                                System.out.println("Zmiana kierunku na 3 ");
+                                System.out.println("@string/Main_DebugCommand3");
                             }
                         }
                         if(direction == 7 && dir != 7) {
@@ -198,68 +197,60 @@ public class MainActivity extends AppCompatActivity implements Runnable{
                                 sendnningred("7");
                                 Thread.sleep(40);
                                 dir = 7;
-                                System.out.println("Zmiana kierunku na 7 ");
+                                System.out.println("@string/Main_DebugCommand7");
                             }
                         }
 
                         sendnningred(""+saturation);
                     }
-
-                    Thread.sleep(10); // było 10
+                    Thread.sleep(10);
                 } catch (Exception e) {
-                    //TODO show exception
+                    //TODO throw exception
                 }
             }
         }
     };
 
-
     private void Disconnect() {
-        if (bltSocket != null) //If the btSocket is busy
+        if (bltSocket != null)
         {
             try {
-                bltSocket.close(); //close connection
+                bltSocket.close();
             } catch (IOException e) {
-                showmsg("Error");
+                showmsg("@string/Main_CommandError");
             }
         }
-        finish(); //return to the first layout
+        finish();
     }
-
 
     public class ConnectBlt extends AsyncTask<Void, Void, Void>
     {
-        /* Connection of Bluetooth in asynch task */
         private boolean isSuccessConnection = true;
 
         @Override
         protected void onPreExecute()
         {
-            /* Progress dialog */
-            System.out.println("Asynch Task1");
-
-            progressOfDialog = ProgressDialog.show(MainActivity.this, "Trwa łączenie...", "Proszę czekać :)");
+            progressOfDialog = ProgressDialog.show(MainActivity.this,
+                    "@string/Main_DialodTitle", "@string/Main_DialodMessage");
         }
 
         @Override
         protected Void doInBackground(Void... arg0)
         {
-            /* Proces of connection is done in background */
-            System.out.println("Asynch Task2");
 
             try
             {
                 if (bltSocket == null || !isBltConnected)
                 {
                     myBltDevice = BluetoothAdapter.getDefaultAdapter();
-                    BluetoothDevice dispositivo = myBltDevice.getRemoteDevice(addressOfBltDevice);  // Connect to device's adress
-                    bltSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);  //Create a RFCOMM (SPP) connection
+                    BluetoothDevice dispositivo = myBltDevice.getRemoteDevice(addressOfBltDevice);
+                    bltSocket = dispositivo.createInsecureRfcommSocketToServiceRecord(myUUID);
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                     bltSocket.connect();
                 }
             } catch (IOException exception)
             {
-                isSuccessConnection = false;    // failed if device is not available
+                isSuccessConnection = false;
             }
             return null;
         }
@@ -267,23 +258,16 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         @Override
         protected void onPostExecute(Void result)
         {
-            /* Check did connection is correct */
-            System.out.println("Asynch Task3");
-
             super.onPostExecute(result);
-
             if (!isSuccessConnection)
             {
-                /* Problem with connection */
                 finish();
             } else {
-                /* Connect */
                 isBltConnected = true;
             }
             progressOfDialog.dismiss();
         }
     }
-
 
     private void showmsg(String s) {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
@@ -294,10 +278,9 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         if (bltSocket != null) {
             try {
                 bltSocket.getOutputStream();
-     //           bltSocket.write(sth.toString().getBytes());
-                System.out.println("Wyslano dane"+bltSocket);
+                System.out.println("@string/Main_DebugCommandDataSending"+bltSocket);
             } catch (IOException e) {
-                //msg("Error");
+                //TODO throw exception
             }
         }
     }

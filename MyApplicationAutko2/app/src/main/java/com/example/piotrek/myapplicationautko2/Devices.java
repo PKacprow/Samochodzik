@@ -1,3 +1,20 @@
+/*! \file Devices.java
+*  \brief Java file storing Devices class
+*/
+/*****************************************************************************
+ * Based on template: File_Template.txt                                      *
+ *                                                                           *
+ * PROJECT ID:   Autko                                                       *
+ *                                                                           *
+ * FILE DESCRIPTION:                                                         *
+ * This file supports devices functionality.                                 *
+ * ***************************************************************************
+ * AUTHORS:                                                                  *
+ * Piotr Kacprowicz 214401                                                   *
+ * Patryk Cieślak 214397                                                     *
+ * Location: Łódź                                                            *
+ *****************************************************************************/
+
 package com.example.piotrek.myapplicationautko2;
 
 import android.app.ProgressDialog;
@@ -29,7 +46,7 @@ public class Devices extends AppCompatActivity
     //Bluetooth
     private BluetoothAdapter myBluetooth = null;
     private Set<BluetoothDevice> pairedDevices;
-    public static String EXTRA_ADDRESS = "device_address";
+    public static String EXTRA_ADDRESS = "@string/Devices_Adress";
 
 
 
@@ -48,7 +65,8 @@ public class Devices extends AppCompatActivity
 
         if (myBluetooth == null) {
             //Show a message when no bluetooth adapter
-            Toast.makeText(getApplicationContext(), "Bluetooth Device Not Available", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),
+                    "@string/Devices_CommandNonAvailableBluetooth", Toast.LENGTH_LONG).show();
 
             //finish apk
             finish();
@@ -73,15 +91,19 @@ public class Devices extends AppCompatActivity
 
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice bt : pairedDevices) {
-                list.add(bt.getName() + "\n" + bt.getAddress()); //Get the device's name and the address
+                //Get the device's name and the address
+                list.add(bt.getName() + "\n" + bt.getAddress());
             }
         } else {
-            Toast.makeText(getApplicationContext(), "No Paired Bluetooth Devices Found.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "@string/Devices_CommandNoPairedDevices",
+                    Toast.LENGTH_LONG).show();
         }
 
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+        final ArrayAdapter adapter = new ArrayAdapter(
+                this, android.R.layout.simple_list_item_1, list);
         devicelist.setAdapter(adapter);
-        devicelist.setOnItemClickListener(myListClickListener); //Method called when the device from the list is clicked
+        //Method called when the device from the list is clicked
+        devicelist.setOnItemClickListener(myListClickListener);
 
     }
 
@@ -96,7 +118,8 @@ public class Devices extends AppCompatActivity
             Intent i = new Intent(Devices.this, MainActivity.class);
 
             //Change the activity.
-            i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
+            //this will be received at ledControl (class) Activity
+            i.putExtra(EXTRA_ADDRESS, address);
             startActivity(i);
         }
     };
